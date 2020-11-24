@@ -14,7 +14,7 @@ def release_app(){
   echo 'branch into release'
 }
 
-dev live_app(){
+def live_app(){
 }
 
 return this
