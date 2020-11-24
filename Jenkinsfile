@@ -30,7 +30,7 @@ pipeline {
     stage('Test') {
       steps {
         echo 'We are in the Testing stage'
-        sh 'python3 test_app.py'
+        sh 'python test_app.py'
       }
     }
 
