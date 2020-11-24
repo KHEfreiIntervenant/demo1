@@ -71,9 +71,11 @@ pipeline{
 	}
       stage('creating release branch'){
         steps{
+		script{
           if(env.BRANCH_NAME == 'develop'){
             echo 'branch into release'
           }
+		}
         }
       }
     }
