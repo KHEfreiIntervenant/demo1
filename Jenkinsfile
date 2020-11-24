@@ -2,27 +2,17 @@ pipeline {
   agent any
   stages {
     stage('build') {
-      parallel {
-        stage('build') {
-          steps {
-            echo 'We are in Build stage'
-          }
-        }
-
-        stage('build2') {
-          steps {
-            echo 'We are in Build 2 stage'
-          }
-        }
-
+      steps {
+        echo 'We are in Build stage'
+        sh 'echo "Hello"'
       }
     }
 
-    stage('test') {
+    stage('Run') {
       parallel {
-        stage('test') {
+        stage('Run') {
           steps {
-            echo 'We are in Test stage'
+            echo 'We are in Run stage'
           }
         }
 
