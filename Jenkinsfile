@@ -52,8 +52,7 @@ pipeline{
         script{
           if(env.BRANCH_NAME == 'develop'){
             sh 'python test_app.py'
-          }
-          else if( env.BRANCH_NAME == 'release') {
+          }else if( env.BRANCH_NAME == 'release') {
             echo 'release-specific test'
           }
         }
@@ -69,6 +68,7 @@ pipeline{
           }
         }
       }
+	}
       stage('creating release branch'){
         steps{
           if(env.BRANCH_NAME == 'develop'){
@@ -77,5 +77,4 @@ pipeline{
         }
       }
     }
-  }
 }
