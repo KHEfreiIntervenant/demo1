@@ -44,6 +44,26 @@ pipeline{
         }
       }
     }
+    stage('Release'){
+      steps{
+        script{
+          if(env.BRANCH_NAME == 'release'){
+            echo 'deploy for staging environment'
+          }
+        }
+      }
+    }
+    
+    stage('Merging to master'){
+      steps{
+        script{
+          if(env.BRANCH_NAME == 'release'){
+            echo 'Merging to master'
+          }
+        }
+      }
+    }
+    
     stage('Stop Containers'){
       steps{
         script{
