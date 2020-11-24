@@ -3,7 +3,7 @@ pipeline{
   
   stages {
     
-    stage('Docker images down first time'){
+/*   stage('Docker images down first time'){
       steps{
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'docker rm -f redis'
@@ -14,7 +14,7 @@ pipeline{
           sh 'docker rmi -f myflaskapp'
         }
       }
-    }
+    }*/
     
     stage('Build Flask app'){
       steps{
