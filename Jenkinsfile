@@ -1,3 +1,4 @@
+def groovyfile
 pipeline{
   agent any
   
@@ -15,17 +16,24 @@ pipeline{
         }
       }
     }*/
+	  
+	  stage ('Build Scripe'){
+	  	steps{
+			script{
+				 def filename = 'jenkins.' + env.BRANCH_NAME + '.groovy'
+				 groovyfile = load filename
+			}
+		}
+	  }
     
     stage('Build Flask app'){
       steps{
-         script{
-          if(env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release'){
-            sh 'docker build -t myflaskapp .'
-          }
+        script{
+          groovyfile.build_app()
         }
       }
     }
-    stage('Run docker images'){
+   /* stage('Run docker images'){
       parallel{
         stage('Run Redis'){
           steps{
@@ -46,35 +54,25 @@ pipeline{
           }
         }
       }
-    }
+    }*/
     stage('Testing'){
       steps{
         script{
-          if(env.BRANCH_NAME == 'develop'){
-            sh 'python test_app.py'
-          }else if( env.BRANCH_NAME == 'release') {
-            echo 'release-specific test'
-          }
+          groovyfile.test_app()
         }
       }
     }
     stage('Docker images down'){
       steps{
         script{
-          if(env.BRANCH_NAME == 'develop'){
-            sh 'docker rm -f redis'
-            sh 'docker rm -f myflaskapp_c'
-            sh 'docker rmi -f myflaskapp'
-          }
+          groovyfile.down_app()
         }
       }
 	}
       stage('creating release branch'){
         steps{
 		script{
-          if(env.BRANCH_NAME == 'develop'){
-            echo 'branch into release'
-          }
+          groovyfile.release_app()
 		}
         }
       }
