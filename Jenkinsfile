@@ -18,33 +18,63 @@ pipeline{
     
     stage('Build Flask app'){
       steps{
-        sh 'docker build -t myflaskapp .'
+         script{
+          if(env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release'){
+            sh 'docker build -t myflaskapp .'
+          }
+        }
       }
     }
     stage('Run docker images'){
       parallel{
         stage('Run Redis'){
           steps{
-            sh 'docker run -d -p 6379:6379 --name redis redis:alpine'
+            script{
+              if(env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release'){
+                sh 'docker run -d -p 6379:6379 --name redis redis:alpine'
+              }
+            }
           }
         }
         stage('Run Flask App'){
           steps{
-            sh 'docker run -d -p 5000:5000 --name myflaskapp_c myflaskapp'
+            script{
+              if(env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release'){
+                sh 'docker run -d -p 5000:5000 --name myflaskapp_c myflaskapp'
+              }
+            }
           }
         }
       }
     }
     stage('Testing'){
       steps{
-        sh 'python test_app.py'
+        script{
+          if(env.BRANCH_NAME == 'develop'){
+            sh 'python test_app.py'
+          }
+          else if( env.BRANCH_NAME == 'release') {
+            echo 'release-specific test'
+          }
+        }
       }
     }
     stage('Docker images down'){
       steps{
-        sh 'docker rm -f redis'
-        sh 'docker rm -f myflaskapp_c'
-        sh 'docker rmi -f myflaskapp'
+        script{
+          if(env.BRANCH_NAME == 'develop'){
+            sh 'docker rm -f redis'
+            sh 'docker rm -f myflaskapp_c'
+            sh 'docker rmi -f myflaskapp'
+          }
+        }
+      }
+      stage('creating release branch'){
+        steps{
+          if(env.BRANCH_NAME == 'develop'){
+            echo 'branch into release'
+          }
+        }
       }
     }
   }
