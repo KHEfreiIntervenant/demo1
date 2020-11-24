@@ -30,7 +30,7 @@ pipeline {
     stage('Test') {
       steps {
         echo 'We are in the Testing stage'
-        sh 'python test_app.py'
+        sh 'python3 test_app.py'
       }
     }
 
@@ -43,7 +43,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             sh 'docker stop myredis'
             sh 'docker rmi -f myredis'
