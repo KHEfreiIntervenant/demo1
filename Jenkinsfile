@@ -1,6 +1,19 @@
 pipeline{
   agent any
+  
   stages {
+    
+    stage('Docker images down first time'){
+      steps{
+        sh 'docker rm -f redis'
+        sh 'docker rm -f myflaskapp_c'
+        sh 'docker rmi -f myflaskapp'
+        sh 'docker rm -f redis'
+        sh 'docker rm -f myflaskapp_c'
+        sh 'docker rmi -f myflaskapp'
+      }
+    }
+    
     stage('Build Flask app'){
       steps{
         sh 'docker build -t myflaskapp .'
