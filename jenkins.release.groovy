@@ -21,7 +21,7 @@ def down_app(){
 def release_app(){
 }
 
-dev live_app(){
+def live_app(){
   echo 'merge with main'
 }
 
