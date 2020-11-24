@@ -3,7 +3,7 @@ def build_app(){
 }
 
 def test_app(){
-  sh 'release-specific testing here'
+  echo 'release-specific testing here'
 }
 
 def down_app(){
