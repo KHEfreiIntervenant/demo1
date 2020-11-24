@@ -30,7 +30,7 @@ pipeline {
     stage('Test') {
       steps {
         echo 'We are in the Testing stage'
-        bat 'python3 test_app.py'
+        sh 'python3 test_app.py'
       }
     }
 
