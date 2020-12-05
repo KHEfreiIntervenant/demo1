@@ -4,7 +4,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo 'Building Docker Images'
-				sh 'docker build -t myflaskapp2'
+				sh 'docker build -t myflaskapp2 .'
 			}
 		}
 		stage('Running') {
