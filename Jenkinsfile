@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'echo We are in build stage'
+        bat 'echo We are in build stage'
       }
     }
 
