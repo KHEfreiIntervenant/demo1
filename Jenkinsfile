@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'We are in build stage'
+        sh 'We are in build stage'
       }
     }
 
