@@ -17,7 +17,7 @@ pipeline {
 
         stage('Run2') {
           steps {
-            bat 'docker run -d -p 6379:6379 --myredis redis'
+            bat 'docker run -d -p 6379:6379 myredis redis'
           }
         }
 
