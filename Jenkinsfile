@@ -9,13 +9,13 @@ pipeline {
 
     stage('Test') {
       steps {
-        bat 'We are in Test stage'
+        bat 'echo We are in Test stage'
       }
     }
 
-    stage('Finish !') {
+    stage('Finish') {
       steps {
-        bat 'We are in Finish stage'
+        bat 'echo We are in Finish stage'
       }
     }
 
