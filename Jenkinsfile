@@ -35,8 +35,8 @@ pipeline {
       parallel {
         stage('Remove Images') {
           steps {
-            bat 'docker stop myflaskapp_c'
-            bat 'docker rmi -f myflaskapp_c'
+            bat 'docker stop myflaskapp3_c'
+            bat 'docker rmi -f myflaskapp3_c'
           }
         }
 
