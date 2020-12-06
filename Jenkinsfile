@@ -13,7 +13,7 @@ pipeline {
       }
     }
 
-    stage('Finish') {
+    stage('Finish !') {
       steps {
         bat 'We are in Finish stage'
       }
